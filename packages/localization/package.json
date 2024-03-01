@@ -1,12 +1,22 @@
 {
   "name": "@kyrobot/localization",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A simple, lightweight, and fast localization module for Kyro Bot in Discord.",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "kyro",
+    "kyro bot",
+    "kyrobot",
+    "locale",
+    "discord",
+    "discord locale",
+    "i18n",
+    "localization"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kyro-Discord-Bot/packages.git",
