@@ -67,7 +67,7 @@ const locale = new Localization(client, {
 await locale.init();
 
 // Now you can get translations! See the directory of the module for the rest of the functions
-locale.resolveKey("en", "some.very.deep.path.to.the.language")
+locale.getKey("en", "some.very.deep.path.to.the.language")
 
 ```
 
