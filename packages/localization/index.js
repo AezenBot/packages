@@ -8,6 +8,17 @@ import path from "path";
  */
 export default class Localization extends EventEmitter {
   /**
+   * Default options for the Localization class.
+   * @type {Object}
+   * @static
+   */
+  static optionsExample = {
+    path: "languages",
+    autoReload: false,
+    autoReloadInterval: 60000 * 60 // 1 hour
+  };
+
+  /**
    * Creates an instance of the Localization class.
    * @param {Object} options - Localization options.
    * @param {string} options.path - The path to the directory containing language files.
@@ -15,23 +26,38 @@ export default class Localization extends EventEmitter {
   constructor(options = {}) {
     super();
 
-    const optionsExample = {
-      path: "languages"
-    };
-
-    options = { ...optionsExample, ...options };
+    options = { ...Localization.optionsExample, ...options };
 
     // Validate parameters
     if (!options.path || typeof options.path !== "string") {
-      throw new Error(`Invalid path provided. Expected a string. Received ${typeof options.path}`);
+      throw new Error(`Invalid path provided. Expected a non-empty string for 'path', but received ${JSON.stringify(options.path)} (${typeof options.path}).`);
     }
+
     if (options.autoReload !== undefined && typeof options.autoReload !== "boolean") {
-      throw new Error(`Invalid autoReload provided. Expected a boolean. Received ${typeof options.autoReload}`);
+      throw new Error(`Invalid autoReload provided. Expected a boolean, but received ${JSON.stringify(options.autoReload)} (${typeof options.autoReload}).`);
     }
-    
-    // Set properties
+
+    if (options.autoReloadInterval !== undefined && typeof options.autoReloadInterval !== "number") {
+      throw new Error(`Invalid autoReloadInterval provided. Expected a number, but received ${JSON.stringify(options.autoReloadInterval)} (${typeof options.autoReloadInterval}).`);
+    }
+
+    /**
+     * Localization options.
+     * @type {Object}
+     */
     this.options = options;
+
+    /**
+     * A map containing loaded language data.
+     * @type {Map}
+     */
     this.languages = new Map();
+
+    /**
+     * Indicates whether the Localization instance has been initialized.
+     * @type {boolean}
+     */
+    this.initialized = false;
   }
 
   /**
@@ -45,7 +71,21 @@ export default class Localization extends EventEmitter {
       throw new Error(`Invalid path provided. Path "${this.options.path}" does not exist in your root directory.`);
     }
 
-    await this.processDirectory(this.options.path, this.languages);
+    if (this.initialized) {
+      throw new Error("Localization has already been initialized.");
+    }
+
+    try {
+      await this.processDirectory(this.options.path, this.languages);
+      this.emit("ready");
+      this.initialized = true;
+
+      if (this.options.autoReload) {
+        this.setupAutoReload();
+      }
+    } catch (error) {
+      throw new Error(`Error during initialization: ${error.message}`);
+    }
   }
 
   /**
@@ -57,6 +97,8 @@ export default class Localization extends EventEmitter {
    * @throws {Error} - Throws an error if the language, key, or placeholders are invalid.
    */
   getKey(language, key, placeholders = {}) {
+    if (!this.initialized) throw new Error("Localization has not been initialized.")
+
     const languageData = this.languages.get(language);
 
     if (!languageData) {
@@ -89,6 +131,8 @@ export default class Localization extends EventEmitter {
    * @throws {Error} - Throws an error if the language is invalid.
    */
   getRaw(language) {
+    if (!this.initialized) throw new Error("Localization has not been initialized.")
+
     const languageData = this.languages.get(language);
 
     if (!languageData) {
@@ -103,20 +147,22 @@ export default class Localization extends EventEmitter {
    * @returns {Map} - A map containing loaded language data.
    */
   getLanguages() {
+    if (!this.initialized) throw new Error("Localization has not been initialized.")
+
     return this.languages;
   }
 
   /**
    * Checks if a path exists.
    * @private
-   * @param {string} path - The path to check.
+   * @param {string} checkPath - The path to check.
    * @returns {boolean} - A boolean indicating whether the path exists.
    */
-  async pathExists(path) {
-    path = `${process.cwd()}/${path}`;
+  async pathExists(checkPath) {
+    const fullPath = path.join(process.cwd(), checkPath);
 
     try {
-      await promises.access(path);
+      await promises.access(fullPath);
       return true;
     } catch (error) {
       return false;
@@ -131,33 +177,32 @@ export default class Localization extends EventEmitter {
    * @throws {Error} - Throws an error if the path is not a directory.
    */
   async processDirectory(directoryPath, currentMap) {
-    const isDirectory = (await promises.stat(directoryPath)).isDirectory();
+    try {
+      const isDirectory = (await promises.stat(directoryPath)).isDirectory();
+      const entries = await promises.readdir(directoryPath);
 
-    if (!isDirectory) {
-      throw new Error(`Invalid path provided. Path "${directoryPath}" is not a directory.`);
-    }
+      for (const entry of entries) {
+        const entryPath = path.join(directoryPath, entry);
+        const isSubfolder = (await promises.stat(entryPath)).isDirectory();
 
-    const entries = await promises.readdir(directoryPath);
+        // Skip processing folders
+        if (isSubfolder) {
+          continue;
+        }
 
-    for (const entry of entries) {
-      const entryPath = path.join(directoryPath, entry);
-      const isSubfolder = (await promises.stat(entryPath)).isDirectory();
+        // Check if the file has a .json extension
+        if (path.extname(entry) === ".json") {
+          // Process files here
+          const content = await promises.readFile(entryPath, "utf-8");
 
-      // Skip processing folders
-      if (isSubfolder) {
-        continue;
+          // Remove file extension from entry
+          const entryWithoutExtension = path.parse(entry).name;
+
+          currentMap.set(entryWithoutExtension, JSON.parse(content));
+        }
       }
-
-      // Check if the file has a .json extension
-      if (path.extname(entry) === ".json") {
-        // Process files here
-        const content = await promises.readFile(entryPath, "utf-8");
-
-        // Remove file extension from entry
-        const entryWithoutExtension = path.parse(entry).name;
-
-        currentMap.set(entryWithoutExtension, JSON.parse(content));
-      }
+    } catch (error) {
+      throw error; // Re-throw the error for consistent error handling
     }
   }
 
@@ -172,5 +217,33 @@ export default class Localization extends EventEmitter {
     return string.replace(/\{(\w+)\}/g, (match, placeholder) => {
       return placeholders[placeholder] || match;
     });
+  }
+
+  /**
+   * Sets up auto-reloading of language files at a specified interval.
+   * @private
+   */
+  setupAutoReload() {
+    const { autoReloadInterval } = this.options;
+
+    this.autoReloadInterval = setInterval(async () => {
+      try {
+        await this.processDirectory(this.options.path, this.languages);
+        this.emit("reload");
+      } catch (error) {
+        console.error(`Error during auto-reload: ${error.message}`);
+      }
+    }, autoReloadInterval);
+  }
+
+  /**
+   * Stops auto-reloading of language files.
+   * @private
+   */
+  stopAutoReload() {
+    if (this.autoReloadInterval) {
+      clearInterval(this.autoReloadInterval);
+      this.autoReloadInterval = null;
+    }
   }
 }
