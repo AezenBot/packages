@@ -1,6 +1,6 @@
 {
   "name": "@kyrobot/localization",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A simple, lightweight, and fast localization module for Kyro Bot in Discord.",
   "main": "index.js",
   "type": "module",
