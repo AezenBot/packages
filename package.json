@@ -1,0 +1,22 @@
+{
+  "name": "@kyrobot/packages",
+  "version": "1.0.0",
+  "description": "A collection of packages that is used in Kyro Bot on Discord.",
+  "author": "kyrobot",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kyro-Discord-Bot/packages.git"
+  },
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.2.6",
+    "path": "^0.12.7"
+  },
+  "bugs": {
+    "url": "https://github.com/Kyro-Discord-Bot/packages/issues"
+  },
+  "homepage": "https://github.com/Kyro-Discord-Bot/packages#readme",
+  "devDependencies": {}
+}
