@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://media.discordapp.net/attachments/1183338541690933288/1213009060807446559/1709274273263.png?ex=65f3e9b8&is=65e174b8&hm=ddecbc18ed73ad3e62d4888fc994806a5c31b5bb8f5f3561b17e242fdc05c41a&=&format=webp&quality=lossless&width=550&height=204" />
+  <img src="https://media.discordapp.net/attachments/1183338541690933288/1213030129870045244/1709279300758.png?ex=65f3fd57&is=65e18857&hm=6e1ddb3225f69b537d7f591ad95444a9ce2c1231b122bd2692dc1ea0e9a47c7a&=&format=webp&quality=lossless&width=1025&height=380" />
 
   # Kyro Packages
   Collection of **open-source** and **free-to-use** modules used for the development of **Kyro Bot**
