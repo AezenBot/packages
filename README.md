@@ -5,6 +5,7 @@
   Collection of **open-source** and **free-to-use** modules used for the development of **Kyro Bot**
   
   [![npm](https://img.shields.io/npm/v/@kyrobot/localization?color=crimson&logo=npm&style=flat-square&label=@kyrobot/localization)](https://www.npmjs.com/package/@kyrobot/localization)
+  [![npm](https://img.shields.io/npm/v/@kyrobot/duration?color=crimson&logo=npm&style=flat-square&label=@kyrobot/duration)](https://www.npmjs.com/package/@kyrobot/duration)
 </div>
 
 ## 🩵 Support the Project
