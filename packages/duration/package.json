@@ -1,0 +1,32 @@
+{
+  "name": "@kyrobot/duration",
+  "version": "1.0.2",
+  "description": "A simple, lightweight, and fast duration module for Kyro Bot in Discord.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kyro",
+    "kyro bot",
+    "kyrobot",
+    "ms",
+    "parse-ms",
+    "duration"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kyro-Discord-Bot/packages.git",
+    "directory": "packages/duration"
+  },
+  "author": "@kyrobot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kyro-Discord-Bot/packages/issues"
+  },
+  "homepage": "https://github.com/Kyro-Discord-Bot/packages/duration",
+  "dependencies": {
+    "bignumber.js": "^9.1.2"
+  }
+}

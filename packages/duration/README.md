@@ -1,9 +1,9 @@
 <div align="center">
   <img src="https://media.discordapp.net/attachments/1183338541690933288/1213030129870045244/1709279300758.png?ex=65f3fd57&is=65e18857&hm=6e1ddb3225f69b537d7f591ad95444a9ce2c1231b122bd2692dc1ea0e9a47c7a&=&format=webp&quality=lossless&width=1025&height=380" />
 
-  # @kyrobot/localization
+  # @kyrobot/duration
   Collection of **open-source** and **free-to-use** modules used for the development of **Kyro Bot**
-  
+
   [![npm](https://img.shields.io/npm/v/@kyrobot/localization?color=crimson&logo=npm&style=flat-square&label=@kyrobot/localization)](https://www.npmjs.com/package/@kyrobot/localization)
   [![npm](https://img.shields.io/npm/v/@kyrobot/duration?color=crimson&logo=npm&style=flat-square&label=@kyrobot/duration)](https://www.npmjs.com/package/@kyrobot/duration)
 </div>
@@ -17,12 +17,13 @@ If you find Kyro valuable. helpful, and enjoy using it, please consider supporti
 
 ## 📍 Features
 - Written with JavaScript ES Module.
-- Easy to use and understand.
-- Quick setup.
-- Lightweight and fast localization.
+- Supports more time units: decades, centuries, megayear, gigayear, and terayear.
+- Added more duration formatter functions.
+- Uses `bignumber.js` to handle large numbers when converting.
+- Lightweight and easy-to-use.
 
 ## ✅ Usage of the Module
-Here's an example of how you can use the [localization](https://www.npmjs.com/package/@kyrobot/localization) module of Kyro.
+Here's an example of how you can use the [duration](https://www.npmjs.com/package/@kyrobot/duration) module of Kyro.
 
 ### Prerequisites
 - **Knowledge:** You must know how to use JavaScript, or how to code in general. It is unlikely that you will get help from using this module by making a new issue.
@@ -31,54 +32,90 @@ Here's an example of how you can use the [localization](https://www.npmjs.com/pa
 
 ### Installation
 ```bash
-npm install @kyrobot/localization
+npm install @kyrobot/duration
 ```
 ```bash
-yarn add @kyrobot/localization
+yarn add @kyrobot/duration
 ```
 ```bash
-pnpm add @kyrobot/localization
-```
-
-### Folder Structure for the Languages
-You can add more languages if you want. Only `.json` files are going to be recognized by the module.
-```
-languages/
-├── en.json
-├── tl.json
-├── fr.json
-├── ja.json
-└── zh.json
+pnpm add @kyrobot/duration
 ```
 
 ### Example.js
 ```js
 // Import the module
-import Localization from "@kyrobot/localization";
+import { Duration, DurationFormatter } from "@kyrobot/duration";
 
-// Create a new Localization class
-const locale = new Localization(client, {
-  /**
-   * Where your languages are stored. You must specify the directory without the root directory.
-   *
-   * Other examples of path:
-   * src/languages
-   * src/bot/languages
-   * modules/languages
-   */
-  path: "languages",
-  autoReload: true, // If the module should auto reload the languages.
-  autoReloadInterval: 3000 // The interval in milliseconds between reloading.
-})
+const converted = new Duration("an hour and 66 seconds");
 
-// IMPORTANT: This must be called, or else the
-// languages won't load and the module won't work.
-await locale.init();
+console.log(converted.ms) // 3666000
+console.log(converted.verbose()) // 1 hour 1 minute 6 seconds
+console.log(converted.colon()) // 01:01:06 (HH:MM:SS format)
+console.log(converted.compact()) // 1h  1m  6s
+console.log(converted.elegant()) //  1 hour, 1 minute and 6 seconds
+console.log(converted.binary()) // 111001010010
+console.log(converted.scientific()) // 3.666e+6
+console.lof(converted.object())
 
-// Now you can get translations! See the directory of the module for the rest of the functions
-locale.getKey("en", "some.very.deep.path.object.to.the.translation")
+// You can also use the DurationFormatter separately if you want.
+const formatter = new DurationFormatter()
 
+console.log(formatter.verbose(converted.ms)) // 1 hour 1 minute 6 seconds
+console.log(formatter.colon(converted.ms)) // 01:01:06 (HH:MM:SS format)
+console.log(formatter.compact(converted.ms)) // 1h  1m  6s
+console.log(formatter.elegant(converted.ms)) //  1 hour, 1 minute and 6 seconds
+console.log(formatter.binary(converted.ms)) // 111001010010
+console.log(formatter.scientific(converted.ms)) // 3.666e+6
+console.log(formatter.object(converted.ms))
 ```
+```json
+{
+  "terayear": "0",
+  "gigayear": "0",
+  "megayear": "0",
+  "millennium": "0",
+  "century": "0",
+  "decade": "0",
+  "year": "0",
+  "month": "0",
+  "week": "0",
+  "day": "0",
+  "hour": "1",
+  "minute": "1",
+  "second": "6",
+  "millisecond": "0",
+  "microsecond": "0",
+  "nanosecond": "0"
+}
+```
+
+### Time Unit Calculations
+If you think something is wrong with this calculation, feel free to open an issue. Thank you.
+```js
+export const CommonFactor = new BigNumber(1000).times(60).times(60).times(24)
+
+export const Time = {
+  Nanosecond: new BigNumber(1e-6),
+  Microsecond: new BigNumber(1e-3),
+  Millisecond: new BigNumber(1),
+  Second: new BigNumber(1000),
+  Minute: new BigNumber(1000).times(60),
+  Hour: new BigNumber(1000).times(60).times(60),
+  Day: CommonFactor,
+  Week: CommonFactor.times(7),
+  Year: CommonFactor.times(365),
+  Month: CommonFactor.times(365 / 12),
+  Decade: CommonFactor.times(365).times(10),
+  Century: CommonFactor.times(365).times(100),
+  Millennium: CommonFactor.times(365).times(1000),
+  Megayear: CommonFactor.times(365).times(1e6),
+  Gigayear: CommonFactor.times(365).times(1e9),
+  Terayear: CommonFactor.times(365).times(1e12)
+};
+```
+
+## ⚠️ Credits
+This module is forked and modified from [sapphiredev's module](https://github.com/sapphiredev/utilities/tree/main/packages%2Fduration), so credits to the original author. If you have copyright issues, please contact me first.
 
 ## 🤝 Contribute to the Project
 We appreciate your interest in contributing to the development of Kyro! Whether you're reporting issues, submitting pull requests, or helping with documentation, your contributions make Kyro better for everyone. Here's how you can get involved:
