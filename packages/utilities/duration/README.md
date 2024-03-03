@@ -6,6 +6,7 @@
 
   [![npm](https://img.shields.io/npm/v/@kyrobot/localization?color=crimson&logo=npm&style=flat-square&label=@kyrobot/localization)](https://www.npmjs.com/package/@kyrobot/localization)
   [![npm](https://img.shields.io/npm/v/@kyrobot/duration?color=crimson&logo=npm&style=flat-square&label=@kyrobot/duration)](https://www.npmjs.com/package/@kyrobot/duration)
+  [![npm](https://img.shields.io/npm/v/@kyrobot/logger?color=crimson&logo=npm&style=flat-square&label=@kyrobot/logger)](https://www.npmjs.com/package/@kyrobot/logger)
 </div>
 
 ## 🩵 Support the Project
@@ -23,7 +24,7 @@ If you find Kyro valuable. helpful, and enjoy using it, please consider supporti
 - Lightweight and easy-to-use.
 
 ## ✅ Usage of the Module
-Here's an example of how you can use the [duration](https://www.npmjs.com/package/@kyrobot/duration) module of Kyro.
+This module is used to convert milleseconds into a human-readable string, and vice versa. Here's an example of how you can use the [duration](https://www.npmjs.com/package/@kyrobot/duration) module of Kyro.
 
 ### Prerequisites
 - **Knowledge:** You must know how to use JavaScript, or how to code in general. It is unlikely that you will get help from using this module by making a new issue.

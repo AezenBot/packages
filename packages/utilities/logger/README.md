@@ -1,9 +1,9 @@
 <div align="center">
   <img src="https://media.discordapp.net/attachments/1183338541690933288/1213030129870045244/1709279300758.png?ex=65f3fd57&is=65e18857&hm=6e1ddb3225f69b537d7f591ad95444a9ce2c1231b122bd2692dc1ea0e9a47c7a&=&format=webp&quality=lossless&width=1025&height=380" />
 
-  # @kyrobot/localization
+  # @kyrobot/logger
   Collection of **open-source** and **free-to-use** modules used for the development of **Kyro Bot**
-  
+
   [![npm](https://img.shields.io/npm/v/@kyrobot/localization?color=crimson&logo=npm&style=flat-square&label=@kyrobot/localization)](https://www.npmjs.com/package/@kyrobot/localization)
   [![npm](https://img.shields.io/npm/v/@kyrobot/duration?color=crimson&logo=npm&style=flat-square&label=@kyrobot/duration)](https://www.npmjs.com/package/@kyrobot/duration)
   [![npm](https://img.shields.io/npm/v/@kyrobot/logger?color=crimson&logo=npm&style=flat-square&label=@kyrobot/logger)](https://www.npmjs.com/package/@kyrobot/logger)
@@ -18,12 +18,11 @@ If you find Kyro valuable. helpful, and enjoy using it, please consider supporti
 
 ## 📍 Features
 - Written with JavaScript ES Module.
-- Easy to use and understand.
-- Quick setup.
-- Lightweight and fast localization.
+- Uses `chalk` to colorize messages.
+- Lightweight.
 
 ## ✅ Usage of the Module
-This module is made and used to support localization of Discord bots and other application. Here's an example of how you can use the [localization](https://www.npmjs.com/package/@kyrobot/localization) module of Kyro.
+A little warning that this module is specifically made for the needs of Kyro, so it may not be able to fulfill the customization that you desire. Here's an example of how you can use the [logger](https://www.npmjs.com/package/@kyrobot/logger) module of Kyro.
 
 ### Prerequisites
 - **Knowledge:** You must know how to use JavaScript, or how to code in general. It is unlikely that you will get help from using this module by making a new issue.
@@ -32,53 +31,32 @@ This module is made and used to support localization of Discord bots and other a
 
 ### Installation
 ```bash
-npm install @kyrobot/localization
+npm install @kyrobot/logger
 ```
 ```bash
-yarn add @kyrobot/localization
+yarn add @kyrobot/logger
 ```
 ```bash
-pnpm add @kyrobot/localization
-```
-
-### Folder Structure for the Languages
-You can add more languages if you want. Only `.json` files are going to be recognized by the module.
-```
-languages/
-├── en.json
-├── tl.json
-├── fr.json
-├── ja.json
-└── zh.json
+pnpm add @kyrobot/logger
 ```
 
 ### Example.js
 ```js
 // Import the module
-import Localization from "@kyrobot/localization";
+import Logger from "@kyrobot/logger";
 
-// Create a new Localization class
-const locale = new Localization(client, {
-  /**
-   * Where your languages are stored. You must specify the directory without the root directory.
-   *
-   * Other examples of path:
-   * src/languages
-   * src/bot/languages
-   * modules/languages
-   */
-  path: "languages",
-  autoReload: true, // If the module should auto reload the languages.
-  autoReloadInterval: 3000 // The interval in milliseconds between reloading.
-})
+const logger = new Logger({
+  timestamp: true, // If you want to include timestamp to your logger.
+  prefix: "LOGGER" // The prefix of each log, default is null.
+});
 
-// IMPORTANT: This must be called, or else the
-// languages won't load and the module won't work.
-await locale.init();
-
-// Now you can get translations! See the directory of the module for the rest of the functions
-locale.getKey("en", "some.very.deep.path.object.to.the.translation")
-
+logger.log("This is a log message.")
+logger.info("This is an info message.")
+logger.warn("This is a warn message.")
+logger.success("This is a success message.")
+logger.debug("This is a debug message.")
+logger.error("This is an error message.")
+logger.fatal("This is a fatal message.")
 ```
 
 ## 🤝 Contribute to the Project
