@@ -1,6 +1,6 @@
 {
   "name": "@kyrobot/duration",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A simple, lightweight, and fast duration module for Kyro Bot in Discord.",
   "main": "index.js",
   "type": "module",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/Kyro-Discord-Bot/packages/issues"
   },
-  "homepage": "https://github.com/Kyro-Discord-Bot/packages/utilities/duration",
+  "homepage": "https://github.com/Kyro-Discord-Bot/packages/tree/main/packages/utilities/duration",
   "dependencies": {
     "bignumber.js": "^9.1.2"
   }
