@@ -1,7 +1,7 @@
 {
-  "name": "@kyrobot/localization",
-  "version": "1.1.0",
-  "description": "A simple, lightweight, and fast localization module for Kyro Bot in Discord.",
+  "name": "@kyrobot/duration",
+  "version": "1.0.2",
+  "description": "A simple, lightweight, and fast duration module for Kyro Bot in Discord.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -11,26 +11,22 @@
     "kyro",
     "kyro bot",
     "kyrobot",
-    "locale",
-    "discord",
-    "discord locale",
-    "i18n",
-    "localization"
+    "ms",
+    "parse-ms",
+    "duration"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kyro-Discord-Bot/packages.git",
-    "directory": "packages/localization"
+    "directory": "packages/utilities/duration"
   },
   "author": "@kyrobot",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Kyro-Discord-Bot/packages/issues"
   },
-  "homepage": "https://github.com/Kyro-Discord-Bot/packages/localization",
+  "homepage": "https://github.com/Kyro-Discord-Bot/packages/utilities/duration",
   "dependencies": {
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7",
-    "yarn": "^1.22.21"
+    "bignumber.js": "^9.1.2"
   }
 }
