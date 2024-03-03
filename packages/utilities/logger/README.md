@@ -58,6 +58,7 @@ logger.debug("This is a debug message.")
 logger.error("This is an error message.")
 logger.fatal("This is a fatal message.")
 ```
+<img src="https://raw.githubusercontent.com/Kyro-Discord-Bot/packages/main/packages/utilities/logger/.github/logger.PNG" />
 
 ## 🤝 Contribute to the Project
 We appreciate your interest in contributing to the development of Kyro! Whether you're reporting issues, submitting pull requests, or helping with documentation, your contributions make Kyro better for everyone. Here's how you can get involved:
