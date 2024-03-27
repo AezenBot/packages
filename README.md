@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://media.discordapp.net/attachments/1183338541690933288/1213030129870045244/1709279300758.png?ex=65f3fd57&is=65e18857&hm=6e1ddb3225f69b537d7f591ad95444a9ce2c1231b122bd2692dc1ea0e9a47c7a&=&format=webp&quality=lossless&width=1025&height=380" />
+  <img src="https://cdn.discordapp.com/attachments/1183338541690933288/1222454458844319826/1710933761137.png?ex=6616466f&is=6603d16f&hm=7e84df9a40d246a27db2b4d5970e4f199e879404e7c986815c6cf62533a973da&" />
 
   # Aezen Packages
   Collection of **open-source** and **free-to-use** modules used for the development of **Aezen**
