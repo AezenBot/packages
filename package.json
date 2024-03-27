@@ -1,12 +1,12 @@
 {
-  "name": "@kyrobot/packages",
+  "name": "@aezen/packages",
   "version": "1.0.0",
-  "description": "A collection of packages that is used in Kyro Bot on Discord.",
-  "author": "kyrobot",
+  "description": "A collection of packages that is used in Aezen Bot on Discord.",
+  "author": "AezenBot",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kyro-Discord-Bot/packages.git"
+    "url": "git+https://github.com/AezenBot/packages.git"
   },
   "dependencies": {
     "@types/node": "^18.0.6",
@@ -15,8 +15,8 @@
     "path": "^0.12.7"
   },
   "bugs": {
-    "url": "https://github.com/Kyro-Discord-Bot/packages/issues"
+    "url": "https://github.com/AezenBot/packages/issues"
   },
-  "homepage": "https://github.com/Kyro-Discord-Bot/packages#readme",
+  "homepage": "https://github.com/AezenBot/packages#readme",
   "devDependencies": {}
 }

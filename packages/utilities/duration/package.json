@@ -1,31 +1,31 @@
 {
-  "name": "@kyrobot/duration",
-  "version": "1.0.4",
-  "description": "A simple, lightweight, and fast duration module for Kyro Bot in Discord.",
+  "name": "@aezen/duration",
+  "version": "1.0.0",
+  "description": "A simple, lightweight, and fast duration module for Aezen Bot in Discord.",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "kyro",
-    "kyro bot",
-    "kyrobot",
+    "Aezen",
+    "Aezen bot",
+    "AezenBot",
     "ms",
     "parse-ms",
     "duration"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kyro-Discord-Bot/packages.git",
+    "url": "git+https://github.com/AezenBot/packages.git",
     "directory": "packages/utilities/duration"
   },
-  "author": "@kyrobot",
+  "author": "@aezen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kyro-Discord-Bot/packages/issues"
+    "url": "https://github.com/AezenBot/packages/issues"
   },
-  "homepage": "https://github.com/Kyro-Discord-Bot/packages/tree/main/packages/utilities/duration",
+  "homepage": "https://github.com/AezenBot/packages/tree/main/packages/utilities/duration",
   "dependencies": {
     "bignumber.js": "^9.1.2"
   }
