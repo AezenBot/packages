@@ -1,6 +1,6 @@
 {
   "name": "@aezen/logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple and lightweight logger module for Aezen Bot in Discord.",
   "main": "index.js",
   "type": "module",
